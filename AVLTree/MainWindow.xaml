@@ -1,0 +1,22 @@
+﻿<Window x:Class="AVLTree.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AVLTree"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="720" Width="1201" Background="#FFDDDCDC">
+    <Grid>
+        <Canvas x:Name="g" HorizontalAlignment="Left" Height="670" Margin="10,10,0,0" VerticalAlignment="Top" Width="970" Background="White"/>
+        <TextBox x:Name="Number" HorizontalAlignment="Left" Height="40" Margin="985,36,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="199" VerticalContentAlignment="Center" FontSize="20" PreviewKeyDown="Number_PreviewKeyDown" KeyDown="Number_KeyDown"/>
+        <Button x:Name="Insert" Content="Insert node" HorizontalAlignment="Left" Margin="985,98,0,0" VerticalAlignment="Top" Width="199" Height="40" FontSize="20" Background="White" Click="Insert_Click"/>
+        <Button x:Name="Search" Content="Search node" HorizontalAlignment="Left" Margin="985,189,0,0" VerticalAlignment="Top" Width="199" Height="40" FontSize="20" Background="White" Click="Search_Click"/>
+        <Button x:Name="Minimum_node" Content="Minimum node" HorizontalAlignment="Left" Margin="985,373,0,0" VerticalAlignment="Top" Width="199" Height="40" FontSize="20" Background="White" Click="Minimum_node_Click"/>
+        <Button x:Name="Maximum_node" Content="Maximum node" HorizontalAlignment="Left" Margin="985,418,0,0" VerticalAlignment="Top" Width="199" Height="40" FontSize="20" Background="White" Click="Maximum_node_Click"/>
+        <Button x:Name="Successor" Content="Successor" HorizontalAlignment="Left" Margin="985,234,0,0" VerticalAlignment="Top" Width="199" Height="40" FontSize="20" Background="White" Click="Successor_Click"/>
+        <Button x:Name="Predecessor" Content="Predecessor" HorizontalAlignment="Left" Margin="985,279,0,0" VerticalAlignment="Top" Width="199" Height="40" FontSize="20" Background="White" Click="Predecessor_Click"/>
+        <Button x:Name="Delete" Content="Delete node" HorizontalAlignment="Left" Margin="985,143,0,0" VerticalAlignment="Top" Width="199" Height="40" FontSize="20" Background="White" Click="Delete_Click"/>
+        <Label Content="Write integer:" HorizontalAlignment="Left" Margin="985,10,0,0" VerticalAlignment="Top" Width="199"/>
+
+    </Grid>
+</Window>

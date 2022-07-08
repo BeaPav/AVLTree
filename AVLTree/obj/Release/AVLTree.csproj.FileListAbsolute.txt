@@ -1,0 +1,14 @@
+D:\Skola\1mMPG-Z\ADŠ\AVLTree\AVLTree\bin\Release\AVLTree.exe.config
+D:\Skola\1mMPG-Z\ADŠ\AVLTree\AVLTree\bin\Release\AVLTree.exe
+D:\Skola\1mMPG-Z\ADŠ\AVLTree\AVLTree\bin\Release\AVLTree.pdb
+D:\Skola\1mMPG-Z\ADŠ\AVLTree\AVLTree\obj\Release\MainWindow.g.cs
+D:\Skola\1mMPG-Z\ADŠ\AVLTree\AVLTree\obj\Release\App.g.cs
+D:\Skola\1mMPG-Z\ADŠ\AVLTree\AVLTree\obj\Release\AVLTree_MarkupCompile.cache
+D:\Skola\1mMPG-Z\ADŠ\AVLTree\AVLTree\obj\Release\AVLTree_MarkupCompile.lref
+D:\Skola\1mMPG-Z\ADŠ\AVLTree\AVLTree\obj\Release\MainWindow.baml
+D:\Skola\1mMPG-Z\ADŠ\AVLTree\AVLTree\obj\Release\AVLTree.g.resources
+D:\Skola\1mMPG-Z\ADŠ\AVLTree\AVLTree\obj\Release\AVLTree.Properties.Resources.resources
+D:\Skola\1mMPG-Z\ADŠ\AVLTree\AVLTree\obj\Release\AVLTree.csproj.GenerateResource.cache
+D:\Skola\1mMPG-Z\ADŠ\AVLTree\AVLTree\obj\Release\AVLTree.csproj.CoreCompileInputs.cache
+D:\Skola\1mMPG-Z\ADŠ\AVLTree\AVLTree\obj\Release\AVLTree.exe
+D:\Skola\1mMPG-Z\ADŠ\AVLTree\AVLTree\obj\Release\AVLTree.pdb
