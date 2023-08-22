@@ -16,13 +16,13 @@ using System.Windows.Shapes;
 
 public class Node
 {
-    public int Value;
-    public Node Par;
-    public Node Left;
-    public Node Right;
-    public int Level;
-    public TextBlock TB;
-    public int Height;
+    public int Value;       // value of the node
+    public Node Par;        // parent node
+    public Node Left;       // left son node
+    public Node Right;      // right son node
+    public int Level;       // distance from the top -- used in visualisation
+    public TextBlock TB;    // text block for visualization
+    public int Height;      // distance from the bottom -- used for AVL condition control
 
 
     //constructor
@@ -50,7 +50,7 @@ public class Node
         };
     }
 
-    //change height of node from the bottom, updates all sons
+    //update node`s height, updates all sons
     public void UpdateNodeHeight()
     {
         if (Left == null && Right == null)
@@ -75,14 +75,11 @@ public class Node
         }
     }
 
-    //update of parent`s height, update also all sons
+    //update parents height
     public void UpdateParentHeight()
     {
         if (Par != null)
-        {
-            
-            //Par.UpdateNodeHeight();              // takto islo povodne rekurzivne, teraz chceme verit ze synovia su aktualizovani
-            
+        {            
             int h1 = 0;
             int h2 = 0;
 
@@ -269,7 +266,7 @@ public class Node
             return;
         }
 
-        //replace one subtree of tree with another rooted in N
+        //replace one subtree of tree with another subtree rooted in N
         else
         {
             if (Par.Left == this)
@@ -324,7 +321,7 @@ public class Node
             {
                 Node Successor = Succ();
 
-                //if suucessor == right means right son has no left son
+                //if suucessor == right, means right son has no left son
                 if (Successor == Right)
                 {
                     Successor.Left = Left;
@@ -526,17 +523,18 @@ namespace AVLTree
             Root = null;
         }
 
+        // allow to write only numbers
         private void Number_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             Allowed = true;
 
-            //nie cislo z klavesnice
+            //not number from keyboard
             if ((e.Key < Key.D0 || e.Key > Key.D9))
             {
-                //nie cislo z numpadu
+                // not number from numpad
                 if ((e.Key < Key.NumPad0 || e.Key > Key.NumPad9))
                 {
-                    //nie backspace
+                    //not backspace
                     if (!(e.Key == Key.Back))
                     {
                         Allowed = false;
@@ -553,6 +551,7 @@ namespace AVLTree
             }
         }
 
+        // insert node button
         private void Insert_Click(object sender, RoutedEventArgs e)
         {
             int Key = Convert.ToInt32(Number.Text.Trim());
@@ -571,6 +570,7 @@ namespace AVLTree
             }
         }
 
+        // search node button
         private void Search_Click(object sender, RoutedEventArgs e)
         {
             int Key = Convert.ToInt32(Number.Text.Trim());
@@ -585,34 +585,7 @@ namespace AVLTree
 
                 if (N != null)
                 {
-                    if (N.Value <= 999)
-                    {
-                        Ellipse R = new Ellipse
-                        {
-                            Stroke = new SolidColorBrush(Colors.Red),
-                            StrokeThickness = 2,
-                            Width = 60,
-                            Height = 60,
-                        };
-                        Canvas.SetLeft(R, Canvas.GetLeft(N.TB) - 13);
-                        Canvas.SetTop(R, Canvas.GetTop(N.TB) - 15);
-
-                        g.Children.Add(R);
-                    }
-                    else
-                    {
-                        Ellipse R = new Ellipse
-                        {
-                            Stroke = new SolidColorBrush(Colors.Red),
-                            StrokeThickness = 2,
-                            Width = 2 * N.TB.ActualWidth,
-                            Height = 60,
-                        };
-                        Canvas.SetLeft(R, Canvas.GetLeft(N.TB) - R.Width / 4);
-                        Canvas.SetTop(R, Canvas.GetTop(N.TB) - 15);
-
-                        g.Children.Add(R);
-                    }
+                    DrawEllipse(N);
                 }
                 else
                 {
@@ -621,6 +594,7 @@ namespace AVLTree
             }
         }
 
+        // minimum node button
         private void Minimum_node_Click(object sender, RoutedEventArgs e)
         {
             if (Root != null)
@@ -630,37 +604,11 @@ namespace AVLTree
 
                 Node N = Root.Minimum();
 
-                if (N.Value <= 999)
-                {
-                    Ellipse R = new Ellipse
-                    {
-                        Stroke = new SolidColorBrush(Colors.GreenYellow),
-                        StrokeThickness = 2,
-                        Width = 60,
-                        Height = 60,
-                    };
-                    Canvas.SetLeft(R, Canvas.GetLeft(N.TB) - 13);
-                    Canvas.SetTop(R, Canvas.GetTop(N.TB) - 15);
-
-                    g.Children.Add(R);
-                }
-                else
-                {
-                    Ellipse R = new Ellipse
-                    {
-                        Stroke = new SolidColorBrush(Colors.GreenYellow),
-                        StrokeThickness = 2,
-                        Width = 2 * N.TB.ActualWidth,
-                        Height = 60,
-                    };
-                    Canvas.SetLeft(R, Canvas.GetLeft(N.TB) - R.Width / 4);
-                    Canvas.SetTop(R, Canvas.GetTop(N.TB) - 15);
-
-                    g.Children.Add(R);
-                }
+                DrawEllipse(N);
             }
         }
 
+        // maximum node button
         private void Maximum_node_Click(object sender, RoutedEventArgs e)
         {
             if (Root != null)
@@ -669,38 +617,11 @@ namespace AVLTree
                 Root.Draw(ref g, 0.0, g.Width);
 
                 Node N = Root.Maximum();
-
-                if (N.Value <= 999)
-                {
-                    Ellipse R = new Ellipse
-                    {
-                        Stroke = new SolidColorBrush(Colors.BlueViolet),
-                        StrokeThickness = 2,
-                        Width = 60,
-                        Height = 60,
-                    };
-                    Canvas.SetLeft(R, Canvas.GetLeft(N.TB) - 13);
-                    Canvas.SetTop(R, Canvas.GetTop(N.TB) - 15);
-
-                    g.Children.Add(R);
-                }
-                else
-                {
-                    Ellipse R = new Ellipse
-                    {
-                        Stroke = new SolidColorBrush(Colors.BlueViolet),
-                        StrokeThickness = 2,
-                        Width = 2 * N.TB.ActualWidth,
-                        Height = 60,
-                    };
-                    Canvas.SetLeft(R, Canvas.GetLeft(N.TB) - R.Width / 4);
-                    Canvas.SetTop(R, Canvas.GetTop(N.TB) - 15);
-
-                    g.Children.Add(R);
-                }
+                DrawEllipse(N);
             }
         }
 
+        // succesor node button
         private void Successor_Click(object sender, RoutedEventArgs e)
         {
             int Key = Convert.ToInt32(Number.Text.Trim());
@@ -721,34 +642,7 @@ namespace AVLTree
 
                     if (Succ != null)
                     {
-                        if (Succ.Value <= 999)
-                        {
-                            Ellipse R = new Ellipse
-                            {
-                                Stroke = new SolidColorBrush(Colors.Aqua),
-                                StrokeThickness = 2,
-                                Width = 60,
-                                Height = 60,
-                            };
-                            Canvas.SetLeft(R, Canvas.GetLeft(Succ.TB) - 13);
-                            Canvas.SetTop(R, Canvas.GetTop(Succ.TB) - 15);
-
-                            g.Children.Add(R);
-                        }
-                        else
-                        {
-                            Ellipse R = new Ellipse
-                            {
-                                Stroke = new SolidColorBrush(Colors.Aqua),
-                                StrokeThickness = 2,
-                                Width = 2 * Succ.TB.ActualWidth,
-                                Height = 60,
-                            };
-                            Canvas.SetLeft(R, Canvas.GetLeft(Succ.TB) - R.Width / 4);
-                            Canvas.SetTop(R, Canvas.GetTop(Succ.TB) - 15);
-
-                            g.Children.Add(R);
-                        }
+                        DrawEllipse(Succ);
                     }
                     else
                     {
@@ -762,6 +656,7 @@ namespace AVLTree
             }
         }
 
+        // predecessor node button
         private void Predecessor_Click(object sender, RoutedEventArgs e)
         {
             int Key = Convert.ToInt32(Number.Text.Trim());
@@ -782,34 +677,7 @@ namespace AVLTree
 
                     if (Pred != null)
                     {
-                        if (Pred.Value <= 999)
-                        {
-                            Ellipse R = new Ellipse
-                            {
-                                Stroke = new SolidColorBrush(Colors.Coral),
-                                StrokeThickness = 2,
-                                Width = 60,
-                                Height = 60,
-                            };
-                            Canvas.SetLeft(R, Canvas.GetLeft(Pred.TB) - 13);
-                            Canvas.SetTop(R, Canvas.GetTop(Pred.TB) - 15);
-
-                            g.Children.Add(R);
-                        }
-                        else
-                        {
-                            Ellipse R = new Ellipse
-                            {
-                                Stroke = new SolidColorBrush(Colors.Coral),
-                                StrokeThickness = 2,
-                                Width = 2 * Pred.TB.ActualWidth,
-                                Height = 60,
-                            };
-                            Canvas.SetLeft(R, Canvas.GetLeft(Pred.TB) - R.Width / 4);
-                            Canvas.SetTop(R, Canvas.GetTop(Pred.TB) - 15);
-
-                            g.Children.Add(R);
-                        }
+                        DrawEllipse(Pred);
                     }
                     else
                     {
@@ -823,6 +691,7 @@ namespace AVLTree
             }
         }
 
+        // delete node button
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
             int Key = Convert.ToInt32(Number.Text.Trim());
@@ -847,6 +716,44 @@ namespace AVLTree
                 
             }
         }
+
+        // draw customized ellipse according to number to emphasize node
+        private void DrawEllipse(Node n)
+        {
+            
+            if (n.Value <= 999)
+            {
+                Ellipse R = new Ellipse
+                {
+                    Stroke = new SolidColorBrush(Colors.Red),
+                    StrokeThickness = 2,
+                    Width = 60,
+                    Height = 60,
+                };
+                Canvas.SetLeft(R, Canvas.GetLeft(n.TB) - 13);
+                Canvas.SetTop(R, Canvas.GetTop(n.TB) - 15);
+
+                g.Children.Add(R);
+            }
+            else
+            {
+                Ellipse R = new Ellipse
+                {
+                    Stroke = new SolidColorBrush(Colors.Red),
+                    StrokeThickness = 2,
+                    Width = 2 * n.TB.ActualWidth,
+                    Height = 60,
+                };
+                Canvas.SetLeft(R, Canvas.GetLeft(n.TB) - R.Width / 4);
+                Canvas.SetTop(R, Canvas.GetTop(n.TB) - 15);
+
+                g.Children.Add(R);
+            }
+        }
+
+
+
+
         /*
         private void Leftrotate_Click(object sender, RoutedEventArgs e)
         {
